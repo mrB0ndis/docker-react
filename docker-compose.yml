@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  nweb:
+#    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+#    command: ["run", "test"]
+#    cpus: 0.5
+#    mem_limit: 500m
+#    restart: on-failure
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - ./public:/app/public
+      - ./src:/app/src
+#      - type: volume
+#        source: pub_data
+#        tardet: /app
+#volumes:
+#  pub_data:
+  tests:
+    image: frontend_nweb
+    volumes:
+      - /app/node_modules
+      - ./public:/app/public
+      - ./src:/app/src
+    command: ["run", "test"]
