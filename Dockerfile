@@ -6,4 +6,5 @@ COPY [".", "."]
 RUN npm run build
 
 FROM nginx:1.19-alpine
+EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
